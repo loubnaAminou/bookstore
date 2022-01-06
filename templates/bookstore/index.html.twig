@@ -1,0 +1,58 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}MIL Bookstore
+{% endblock %}
+
+{% block body %}
+	<form>
+		<ul class="nav justify-content-center" style="margin : 2em;">
+
+			<li class="nav-item">
+				<select  class="form-select" name="genre" id="">
+				<option selected disabled>Genre</option>
+				{% for genre in genres %}
+					<option>{{genre.nom}}</option>
+				{% endfor %}
+				</select>
+			</li>
+			<li class="nav-item">
+				<input class="form-control" type="date" placeholder="Année de publication..." >
+			</li>
+			<li class="nav-item">
+				<input class="form-control" type="number" placeholder="Note Livre..." min="0" max="20">
+			</li>
+			<li class="nav-item">
+				<input class="form-control" type="text" placeholder="Auteur...">
+			</li>
+			<li class="nav-item">
+				<button  class="btn btn-outline-info" type="submit">Filter</button>
+			</li>
+		</ul>
+
+	</form>
+
+	<div class="row">
+		{% for livre in livres %}
+			<div class="col-sm-6">
+				<div class="card">
+					<div class="card-body">
+						<h5 class="card-title">{{livre.titre}}</h5>
+						<h6 class="card-subtitle text-muted">{{livre.isbn}}</h6>
+						<p class="card-text">Publié le
+							{{livre.dateParution | date('d-m-Y')}}
+							<br><small class="text-muted">Note/20 :
+								{{livre.note}}</small>
+						</p>
+						<a href="{{ path('book_show', {'id' : livre.id} )}}" class="card-link">Afficher les détails...</a>
+					</div>
+				</div>
+			</div>
+		{% endfor %}
+
+	</div>
+	<div>
+		<ul class="pagination">
+			{{knp_pagination_render(livres)}}
+		</ul>
+	</div>
+{% endblock %}

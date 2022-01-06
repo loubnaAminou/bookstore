@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title>
+			{% block title %}MIL Bookstore
+			{% endblock %}
+		</title>
+		<script type="text/javascript" src="js/jquery-1.8.0.js"></script>
+		<link rel="stylesheet" href="https://bootswatch.com/5/yeti/bootstrap.min.css">
+		<link
+		rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 128 128%22><text y=%221.2em%22 font-size=%2296%22>📚</text></svg>">
+		{# Run `composer require symfony/webpack-encore-bundle` to start using Symfony UX #}
+		{% block stylesheets %}
+			{{ encore_entry_link_tags('app') }}
+		{% endblock %}
+
+		{% block javascripts %}
+			{{ encore_entry_script_tags('app') }}
+		{% endblock %}
+	</head>
+	<body>
+		<nav class="navbar navbar-expand-lg navbar-light bg-light">
+			<div class="container-fluid">
+				<a class="navbar-brand" href="{{ path('store' )}}">MIL Store</a>
+				<button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarColor03" aria-controls="navbarColor03" aria-expanded="false" aria-label="Toggle navigation">
+					<span class="navbar-toggler-icon"></span>
+				</button>
+
+				<div class="collapse navbar-collapse" id="navbarColor03">
+					<ul class="navbar-nav me-auto justify-content-center">
+						<li class="nav-item">
+							<a class="nav-link active" href="{{ path('store' )}}">Home
+								<span class="visually-hidden">(current)</span>
+							</a>
+						</li>
+						<li class="nav-item">
+							<a class="nav-link" href="{{ path('bookstore')}}">Livres</a>
+						</li>
+						<li class="nav-item">
+							<a class="nav-link" href="{{ path('auteur' )}}">Auteurs</a>
+						</li>
+						<li class="nav-item">
+							<a class="nav-link" href="{{ path('genre')}}">Genres</a>
+						</li>
+					</ul>
+				</div>
+			</div>
+		</nav>
+		<div class="container"> 
+			{% block body %}{% endblock %}
+		</div>
+		</body>
+	</html>

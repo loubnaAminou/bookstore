@@ -1,0 +1,38 @@
+{% extends "/auteur/index.html.twig" %}
+
+{% block body %}
+<div class="container">
+				<h3>
+					L'auteur
+					<small class="text-muted">
+						N° {{auteur.id}} </small>
+				</h3>
+					<div class="card bg-light mb-3" style="max-width: 200rem;">
+						<div class="card-body">
+							<h4 class="card-title">{{auteur.NomPrenom}}</h4>
+							<div class="list-group">
+								<div class="list-group-item list-group-item-action flex-column align-items-start">
+									<div class="d-flex w-100 justify-content-between">
+										<h5 class="mb-1">{{auteur.NomPrenom}}</h5>
+										<small>
+											{% if auteur.Sexe == 'F' %}
+												Féminin
+											{% endif %}
+											{% if auteur.Sexe == 'M' %}
+												Masculin
+											{% endif %}
+										</small>
+									</div>
+									<p class="mb-1">{{auteur.DateNaissance |date('d-m-Y')}}</p>
+									<small>{{auteur.Nationalite}}</small>
+								</div>
+							{% if is_granted('ROLE_ADMIN') %}
+									<a class="btn btn-warning" type="submit" href="{{ path('editAuteur', {'id' : auteur.id} )}}">Modifier</a>
+									<a class="btn btn-danger" type="submit" href="{{ path('delAuteur', {'id' : auteur.id} )}}">Supprimer</a>
+								{% endif %}
+								</div>
+						</div>
+					</div>
+
+		</div>			
+{% endblock %}

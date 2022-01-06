@@ -1,0 +1,44 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Détails sur livre {{livre.titre}}
+{% endblock %}
+
+{% block body %}
+
+	<div class="container">
+		<h5>{{livre.titre}}
+			N°
+			{{livre.id}}
+		</h5>
+		<h6 class="text-muted">{{livre.isbn}}</h6>
+		<h6 class="text-muted">Genre :
+		</h6>
+		<ul>
+			{% for genre in livre.genres %}
+				<li>
+					{{genre.nom}}
+				</li>
+			{% endfor %}
+		</ul>
+
+		<h6 class="text-muted">Auteur :
+		</h6>
+		<ul>
+			{% for auteur in livre.auteurs %}
+				<li>
+					{{auteur.nomPrenom}}
+				</li>
+			{% endfor %}
+		</ul>
+		<p>Publié le
+			{{livre.dateParution | date('d-m-Y')}}
+			<br><small class="text-muted">Note/20 :
+				{{livre.note}}</small>
+		</p>
+		<hr>
+		{% if is_granted('ROLE_ADMIN') %}
+							<a class="btn btn-warning" href="{{ path('editBook', {'id' : livre.id})}}">Modifier</a>
+							<a class="btn btn-danger" href="{{ path('delBook', {'id' : livre.id})}}">Supprimer</a>
+							{% endif %}
+	</div>
+{% endblock %}
